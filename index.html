@@ -83,6 +83,41 @@
 <footer>
   &copy; 2025 OUR LIGHT COMPREHENSIVE COLLEGE — Powered by HTML & CSS
 </footer>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-analytics.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyA-1Mazb7X1e0xj_MoScxPyaqZnKcxpc7c",
+    authDomain: "our-light-college.firebaseapp.com",
+    projectId: "our-light-college",
+    storageBucket: "our-light-college.firebasestorage.app",
+    messagingSenderId: "722078372455",
+    appId: "1:722078372455:web:6444eab7123c38843afac2",
+    measurementId: "G-YZLL6L86C1"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  try { const analytics = getAnalytics(app); } catch(e){}
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  async function testWrite() {
+    const { addDoc, collection } = await import("https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js");
+    await addDoc(collection(db, "notes"), {
+      title: "Hello World",
+      content: "First test note from OUR LIGHT portal",
+      createdAt: new Date().toISOString()
+    });
+    alert("✅ Test note added! Check Firestore → notes");
+  }
+
+  window.testWrite = testWrite;
+</script>
+
+<button onclick="testWrite()">Add Test Note</button>
+<!--
 </body>
   </html>
